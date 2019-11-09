@@ -1,4 +1,4 @@
-{%load bootstrap4%}
+{% load bootstrap4 %}
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -7,6 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
     {% if title %}
     <title>foto op- {{title}}</title>
     {% else %}
@@ -14,19 +15,91 @@
     {% endif %}
 
     {% block styles %}
-        {% bootstrap_css %}
-    {% endblock %}
+    {% bootstrap_css %}
+
+    <!-- Bootstrap core CSS -->
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Bootstrap -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <!-- Material Design for Bootstrap -->
+    <link href="{% static 'css/mdb.min.css' %}" rel="stylesheet">
+    <!-- My CSS -->
+    <link rel="stylesheet" href="{%static 'css/basephoto.css'%}">
 
 
-    {% block scripts %}
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-     {% bootstrap_javascript %}
     {% endblock %}
+
 </head>
 
 <body>
     {% include "navbar.html" %}
-    {% block content %} <h1>FOTO OPS!</h1> {%endblock%}
+    {% block content %}
+
+    <h1>FOTO OPS!</h1>
+    {% endblock %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div id="mdb-lightbox-ui"></div>
+                <div class="mdb-lightbox no-margin" id="image-area">
+                    {% for image in all_images %}
+
+                    <figure class="col-md-4" >
+                        
+                            <img src="{{ image.image_path.url }}" data-toggle="modal"
+                                data-target="#basicExampleModal{{image.id}}" style="height: 200px; width:350px;">
+                    
+                    </figure>
+                    
+                    <!-- Modal -->
+                    <div class="modal fade" id="basicExampleModal{{image.id}}" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">{{image.image_name}}</h5>
+                                    <span aria-hidden="true">&times;</span>
+                                </div>
+                                <div class="modal-body">
+                                    <img src="{{image.image_path.url }}" class="img-responsive" alt="Image"
+                                        style="width: 450px; height: 300px;"">
+                            <hr>
+                            <p>Description: {{image.description}}</p>
+                            <p>Category: {{image.image_category}}</p>
+                            <p>Location: {{image.image_location}}</p>
+                        </div>
+                        <div class=" modal-footer">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    {% block scripts %}
+    {% bootstrap_javascript %}
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Popper.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+
+    <!-- Bootstrap -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+    <!-- Material Design for Bootstrap -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.16/js/mdb.min.js"></script>
+    {% endblock scripts%}
+
 </body>
 
 </html>
