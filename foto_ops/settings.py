@@ -121,6 +121,12 @@ USE_L10N = True
 USE_TZ = True
 
 
+
+
+
+# djang-heroku setting
+import django_heroku
+django_heroku.settings(locals())
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
