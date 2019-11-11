@@ -14,3 +14,6 @@ img{
   border-style:solid;
   border-color: rgba(0, 0, 0, 0.918);
 }
+#myInput{
+  display: none;
+}
