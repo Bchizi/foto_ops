@@ -15,15 +15,15 @@ class Category(models.Model):
 
     def __str__(self):
         return self.category_name
-        
+
     def save_category(self):
         self.save()
 class Image(models.Model):
     image_path = models.ImageField(upload_to='photo/')
     image_name = models.CharField(max_length=30)
     image_description = models.TextField()
-    image_location = models.ForeignKey(Location)   
-    image_category = models.ForeignKey(Category)
+    image_location = models.ForeignKey(Location, on_delete=models.CASCADE)   
+    image_category = models.ForeignKey(Category, on_delete=models.CASCADE)
     created_at = models.DateField(default=datetime.now,blank=True)
 
     def __str__(self):
