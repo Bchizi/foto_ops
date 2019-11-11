@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import datetime
 
 # Create your models here.
 class Location(models.Model):
@@ -7,17 +8,23 @@ class Location(models.Model):
     def __str__(self):
         return self.location_name
 
+    def save_location(self):
+        self.save()
 class Category(models.Model):
     category_name = models.CharField(max_length=30)
 
     def __str__(self):
         return self.category_name
+        
+    def save_category(self):
+        self.save()
 class Image(models.Model):
     image_path = models.ImageField(upload_to='photo/')
     image_name = models.CharField(max_length=30)
     image_description = models.TextField()
     image_location = models.ForeignKey(Location)   
     image_category = models.ForeignKey(Category)
+    created_at = models.DateField(default=datetime.now,blank=True)
 
     def __str__(self):
         return self.image_name
