@@ -39,6 +39,7 @@
     <h1
         style="text-align: center;font-family: 'ZCOOL KuaiLe', cursive;border-color: aliceblue; border-bottom-right-radius: 5px;">
         FOTO OPS!</h1>
+        {% endblock %}
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -87,7 +88,7 @@
             </div>
         </div>
     </div>
-    {% endblock %}
+   
 
 
 
@@ -106,7 +107,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js"></script>
 
     <!-- Material Design for Bootstrap -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.16/js/mdb.min.js"></script>
+    <script src="{% static 'js/mdb.min.js' %}"></script>
+
+    <script src="{% static 'js/all.js' %}"></script>
 
     <script type="text/javascript" src="{% static 'js/basephoto.js' %}"></script>
     {% endblock scripts%}
